@@ -13,6 +13,7 @@ psycopg2-binary = "*"
 pytest = "*"
 pytest-django = "*"
 celery = {extras = ["redis"], version = "*"}
+drf-spectacular = "*"
 
 [dev-packages]
 pre-commit = "*"
@@ -20,4 +21,8 @@ black = "*"
 flake8 = "*"
 
 [requires]
-python_version = "3.10.2"
+python_version = "3.10"
+
+[scripts]
+compose = "docker-compose up"
+compose-run = "docker-compose exec api"

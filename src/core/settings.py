@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "rest_framework",
     "rest_framework_simplejwt",
+    "drf_spectacular",
     "corsheaders",
     # Local apps
     "accounts",
@@ -105,6 +106,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -121,3 +123,13 @@ CELERY_TIMEZONE = TIME_ZONE
 CELERY_ACCEPT_CONTENT = ["application/json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
+
+# API docs
+SPECTACULAR_SETTINGS = {
+    "TITLE": "proper-DRF-startup",
+    "DESCRIPTION": "My vision of proper(but not perfect) Django REST Framework application",
+    "VERSION": "0.1.0",
+    "LICENSE": {"name": "MIT"},
+    "SCHEMA_PATH_PREFIX": r"/v[0-9]",
+    "OAUTH2_AUTHORIZATION_URL": "/v1/accounts/token/"
+}
