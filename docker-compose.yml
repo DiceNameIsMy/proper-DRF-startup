@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: compose/local/Dockerfile
     command: bash -c "
-        pipenv run ./src/manage.py migrate
-        && pipenv run ./src/manage.py runserver 0.0.0.0:8000"
+        ./src/manage.py migrate
+        && ./src/manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./src/:/app/src/
     ports:
@@ -22,7 +22,7 @@ services:
     <<: *api
     command: bash -c "
       cd src/
-      && pipenv run celery -A core.celery worker -l info"
+      && celery -A core.celery worker -l info"
     ports: []
 
   redis:
