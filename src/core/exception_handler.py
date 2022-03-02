@@ -7,6 +7,8 @@ from rest_framework.views import set_rollback
 from rest_framework import exceptions
 from rest_framework.response import Response
 
+from rest_framework_simplejwt.exceptions import InvalidToken
+
 logger = logging.getLogger(__name__)
 
 
@@ -17,17 +19,19 @@ def exception_handler(exc, context):
     elif isinstance(exc, PermissionDenied):
         exc = exceptions.PermissionDenied()
 
-    if isinstance(exc, exceptions.APIException):
+    elif isinstance(exc, exceptions.APIException):
         headers = {}
         if getattr(exc, "auth_header", None):
             headers["WWW-Authenticate"] = exc.auth_header
         if getattr(exc, "wait", None):
             headers["Retry-After"] = "%d" % exc.wait
 
-        if isinstance(exc.detail, list):
+        if isinstance(exc, InvalidToken):
+            data = exc.detail
+        elif isinstance(exc.detail, list):
             data = [{"detail": s, "code": s.code} for s in exc.detail]
-        if isinstance(exc.detail, dict):
-            data = {e: [{"detail": s, "code": s.code} for s in exc.detail[e]] for e in exc.detail}
+        elif isinstance(exc.detail, dict):
+            data = {e: [{"detail": s, "code": getattr(s, "code", "")} for s in exc.detail[e]] for e in exc.detail}
         else:
             data = {"non_field_errors": {"detail": exc.detail, "code": exc.default_code}}
 

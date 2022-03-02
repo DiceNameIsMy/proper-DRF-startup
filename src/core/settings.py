@@ -107,6 +107,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
     "EXCEPTION_HANDLER": "core.exception_handler.exception_handler",
+    # uncomment this line to include exception code in error message
+    # "EXCEPTION_HANDLER": "core.exception_handler.exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -132,5 +134,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.1.0",
     "LICENSE": {"name": "MIT"},
     "SCHEMA_PATH_PREFIX": r"/v[0-9]",
-    "OAUTH2_AUTHORIZATION_URL": "/v1/accounts/token/",
+    "OAUTH2_TOKEN_URL": "/v1/accounts/token/",
+    "OAUTH2_REFRESH_URL": "/v1/accounts/token/refresh/",
 }
