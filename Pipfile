@@ -19,6 +19,10 @@ drf-spectacular = "*"
 pre-commit = "*"
 black = "*"
 flake8 = "*"
+mypy = "*"
+django-stubs = "*"
+djangorestframework-stubs = "*"
+celery-types = "*"
 
 [requires]
 python_version = "3.10"
@@ -27,5 +31,4 @@ python_version = "3.10"
 compose = "docker-compose up"
 compose-down = "docker-compose down"
 compose-run = "docker-compose exec api"
-
 compose-prod = "docker-compose -f docker-compose.prod.yml up"
