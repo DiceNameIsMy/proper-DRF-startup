@@ -18,7 +18,7 @@ RUN addgroup appgroup && useradd -g appgroup appuser && \
 
 # install dependencies
 COPY Pipfile Pipfile.lock ${APP_HOME}/
-RUN pipenv lock -r > ${APP_HOME}/requirements.txt && \
+RUN pipenv requirements > ${APP_HOME}/requirements.txt && \
     pip install -r ${APP_HOME}/requirements.txt
 
 COPY src/ ${APP_HOME}/src

@@ -14,7 +14,7 @@ WORKDIR ${APP_HOME}
 
 # install dependencies
 COPY Pipfile Pipfile.lock ${APP_HOME}/
-RUN pipenv lock -r --dev > ${APP_HOME}/requirements.txt && \
+RUN pipenv requirements --dev > ${APP_HOME}/requirements.txt && \
     pip install -r ${APP_HOME}/requirements.txt
 
 # project source is included via volume
