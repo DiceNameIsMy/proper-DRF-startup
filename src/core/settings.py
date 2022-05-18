@@ -133,7 +133,6 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "My vision of proper(but not perfect) Django REST Framework application",
     "VERSION": "0.1.0",
     "LICENSE": {"name": "MIT"},
-    "SCHEMA_PATH_PREFIX": r"/v[0-9]",
-    "OAUTH2_TOKEN_URL": "/v1/accounts/token/",
-    "OAUTH2_REFRESH_URL": "/v1/accounts/token/refresh/",
+    "OAUTH2_TOKEN_URL": "/accounts/token/",
+    "OAUTH2_REFRESH_URL": "/accounts/token/refresh/",
 }
