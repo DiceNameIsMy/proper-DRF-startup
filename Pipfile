@@ -28,6 +28,7 @@ celery-types = "*"
 python_version = "3.10"
 
 [scripts]
+setup = "bash -c 'cp compose/local/.env-sample compose/local/.env && cp compose/prod/.env-sample compose/prod/.env && pipenv install --dev && pipenv run pre-commit install'"
 compose = "docker-compose up"
 compose-down = "docker-compose down"
 compose-run = "docker-compose exec api"
