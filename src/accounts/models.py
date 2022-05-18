@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser, AnonymousUser as DjangoAnonymousUser
+from django.contrib.auth.models import AbstractUser, UserManager, AnonymousUser as DjangoAnonymousUser
 
 
 class User(AbstractUser):
-    pass
+    objects: UserManager
 
 
 class AnonymousUser(DjangoAnonymousUser):
