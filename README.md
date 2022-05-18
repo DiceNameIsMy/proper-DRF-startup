@@ -15,3 +15,9 @@ Build and run image via docker-compose:
 ## Setup for development
 
     pipenv run setup
+
+## Run tests(after setup)
+
+    cd src/
+    pipenv run compose -d pg
+    pipenv run pytest
