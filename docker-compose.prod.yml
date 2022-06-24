@@ -13,9 +13,6 @@ services:
       - 8000:8000
     env_file:
       - compose/prod/.env
-    depends_on:
-      - redis
-      - pg
 
   celeryworker:
     <<: *api
@@ -23,21 +20,3 @@ services:
       cd src/
       && celery -A core.celery worker -l info"
     ports: []
-
-  redis:
-    image: redis:6-alpine
-    volumes:
-      - redis-data:/data
-
-  pg:
-    image: postgres:14-alpine
-    volumes:
-      - pg-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=database
-
-volumes:
-  redis-data:
-  pg-data:

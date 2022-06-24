@@ -9,6 +9,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     path("accounts/", include("accounts.api.urls")),
     path("admin/", admin.site.urls),
+    path("", include("django_prometheus.urls")),
     path(
         "docs/",
         include(
