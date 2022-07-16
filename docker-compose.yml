@@ -17,6 +17,8 @@ services:
     depends_on:
       - redis
       - pg
+    networks:
+      - compose_network
 
   celeryworker:
     <<: *api
@@ -29,6 +31,8 @@ services:
     image: redis:6-alpine
     volumes:
       - redis-data:/data
+    networks:
+    - compose_network
 
   pg:
     image: postgres:14-alpine
@@ -40,23 +44,13 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
       - POSTGRES_DB=database
-
-  prometheus:
-    image: prom/prometheus
-    ports:
-      - 9090:9090
-    volumes:
-      - ./prometheus:/etc/prometheus
-    depends_on:
-      - api
-
-  grafana:
-    image: grafana/grafana-oss
-    ports:
-      - 3000:3000
-    depends_on:
-      - prometheus
+    networks:
+    - compose_network
 
 volumes:
   redis-data:
   pg-data:
+
+networks:
+  compose_network:
+    external: true

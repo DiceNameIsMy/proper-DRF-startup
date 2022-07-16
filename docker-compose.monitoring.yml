@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    command: "--config.file=/etc/prometheus/prometheus.yml \
+      --web.console.templates /etc/prometheus/consoles/ \
+      --web.console.libraries /usr/share/prometheus/console_libraries/"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    networks:
+      - compose_network
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus
+
+networks:
+  compose_network:
+    external: true
