@@ -66,7 +66,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django_prometheus.db.backends.postgresql",
+        "ENGINE": "django.db.backends.postgresql",
+        # Use this engine if you'd like to monitor your database too
+        # "ENGINE": "django_prometheus.db.backends.postgresql",
         "HOST": os.getenv("PG_HOST", "localhost"),
         "PORT": os.getenv("PG_PORT", "5433"),
         "NAME": os.getenv("PG_DATABASE", "database"),
