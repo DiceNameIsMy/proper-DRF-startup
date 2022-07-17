@@ -5,6 +5,8 @@ name = "pypi"
 
 [scripts]
 server = "docker-compose up --build"
+db = "docker-compose up -d pg redis"
+prod-server = "bash -c 'bash ./scripts/build-prod.sh && docker-compose -f docker-compose.prod.yml up'"
 down = "docker-compose down"
 metrics = "docker-compose -f docker-compose.monitoring.yml up --build"
 setup = "bash ./scripts/setup.sh"

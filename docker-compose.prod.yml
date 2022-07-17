@@ -2,10 +2,11 @@ version: '3'
 
 services:
   api: &api
+    image: proper-drf-startup:latest
     build:
       context: .
       dockerfile: compose/prod/Dockerfile
-    command: bash -c "
+    command: sh -c "
         cd src
         && ./manage.py migrate
         && gunicorn core.wsgi:application -c core/gunicorn.conf.py --bind 0.0.0.0:8000"
@@ -16,7 +17,7 @@ services:
 
   celeryworker:
     <<: *api
-    command: bash -c "
+    command: sh -c "
       cd src/
       && celery -A core.celery worker -l info"
     ports: []
