@@ -1,0 +1,38 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+server = "docker-compose up --build"
+test = "bash -c 'cd src && pytest .'"
+db = "docker-compose up -d pg redis"
+prod-server = "bash -c 'bash ./scripts/build-prod.sh && docker-compose -f docker-compose.prod.yml up'"
+down = "docker-compose down"
+metrics = "docker-compose -f docker-compose.monitoring.yml up --build"
+setup = "bash ./scripts/setup.sh"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+gunicorn = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+psycopg2-binary = "*"
+pytest = "*"
+pytest-django = "*"
+celery = {extras = ["redis"], version = "*"}
+drf-spectacular = "*"
+django-prometheus = "*"
+
+[dev-packages]
+pre-commit = "*"
+black = "*"
+flake8 = "*"
+mypy = "*"
+django-stubs = "*"
+djangorestframework-stubs = "*"
+celery-types = "*"
+
+[requires]
+python_version = "3.10"
