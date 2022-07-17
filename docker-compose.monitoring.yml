@@ -13,13 +13,6 @@ services:
     networks:
       - compose_network
 
-  grafana:
-    image: grafana/grafana-oss
-    ports:
-      - 3000:3000
-    depends_on:
-      - prometheus
-
 networks:
   compose_network:
     external: true
