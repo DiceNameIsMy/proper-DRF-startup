@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser, UserManager, AnonymousUser 
 
 
 class User(AbstractUser):
-    objects: UserManager
+    objects: UserManager["User"] = UserManager()  # type: ignore[assignment]
 
 
 class AnonymousUser(DjangoAnonymousUser):

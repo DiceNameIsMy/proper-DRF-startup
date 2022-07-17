@@ -1,3 +1,4 @@
+from typing import Callable
 import pytest
 
 from django.urls import reverse
@@ -12,7 +13,7 @@ PROFILE_URL = reverse("profile")
 
 
 @pytest.mark.django_db
-def test_valid(api: APIClient, authorize, user: User):
+def test_valid(api: APIClient, authorize: Callable[[APIClient, User], None], user: User) -> None:
     authorize(api, user)
     r: Response = api.get(PROFILE_URL)
 
@@ -31,7 +32,7 @@ def test_valid(api: APIClient, authorize, user: User):
 
 
 @pytest.mark.django_db
-def test_not_authenticated(api: APIClient, user: User):
+def test_not_authenticated(api: APIClient, user: User) -> None:
     r: Response = api.get(PROFILE_URL)
 
     assert r.status_code == 401, r.data

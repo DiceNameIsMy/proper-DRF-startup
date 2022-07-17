@@ -3,7 +3,7 @@ from rest_framework import serializers
 from accounts.models import User
 
 
-class UserDetailSerialzier(serializers.ModelSerializer):
+class UserDetailSerialzier(serializers.ModelSerializer["User"]):
     class Meta:
         model = User
         fields = (

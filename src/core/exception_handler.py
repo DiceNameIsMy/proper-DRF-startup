@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
@@ -12,7 +13,7 @@ from rest_framework_simplejwt.exceptions import InvalidToken
 logger = logging.getLogger(__name__)
 
 
-def exception_handler(exc, context):
+def exception_handler(exc: Exception, context: Any) -> Response | None:
     # handler was rewritten in order to provide error codes
     if isinstance(exc, Http404):
         exc = exceptions.NotFound()
@@ -21,10 +22,10 @@ def exception_handler(exc, context):
 
     elif isinstance(exc, exceptions.APIException):
         headers = {}
-        if getattr(exc, "auth_header", None):
-            headers["WWW-Authenticate"] = exc.auth_header
-        if getattr(exc, "wait", None):
-            headers["Retry-After"] = "%d" % exc.wait
+        if auth_header := getattr(exc, "auth_header", None):
+            headers["WWW-Authenticate"] = auth_header
+        if wait := getattr(exc, "wait", None):
+            headers["Retry-After"] = "%d" % wait
 
         if isinstance(exc, InvalidToken):
             data = exc.detail
