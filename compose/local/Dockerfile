@@ -7,7 +7,6 @@ ENV APP_HOME=/app
 
 # install initial dependencies
 RUN apt-get update && \
-    apt-get -y install libpq-dev gcc gdal-bin &&  \
     pip install --no-cache --upgrade pip pipenv
 
 WORKDIR ${APP_HOME}
