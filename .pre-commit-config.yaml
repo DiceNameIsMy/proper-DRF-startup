@@ -13,4 +13,7 @@ repos:
     rev: 'v0.961'
     hooks:
     -   id: mypy
-        additional_dependencies: [django-stubs, djangorestframework-stubs]
+        args: [--config-file=src/.mypy.ini]
+        entry: env MYPYPATH=src mypy
+        exclude: manage.py
+        additional_dependencies: [django, django-stubs, djangorestframework, djangorestframework-stubs, psycopg2-binary, djangorestframework-simplejwt, django-cors-headers, drf_spectacular, celery, django-prometheus, pytest]
