@@ -1,5 +1,5 @@
 # proper-DRF-startup
-My vision of proper(but not perfect yet) Django REST Framework application
+My vision of proper(but not perfect) Django REST Framework template
 
 ## Setup for development
 
